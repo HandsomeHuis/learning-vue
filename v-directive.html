@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>自定义插件</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="app">
+		<button @click="feia">加载数据</button>
+		<p v-gh="isgg">{{msg}}</p>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+
+		Vue.directive("gh",{
+			update(el,binding,vnode){
+				if(binding.value){
+					const div=document.createElement("div");
+					div.innerHTML="内容加载中";
+					div.setAttribute("id","load");
+					div.style.position = 'absolute'
+			        div.style.left = 0
+			        div.style.top = 0
+			        div.style.width = '100%'
+			        div.style.height = '100%'
+			        div.style.display = 'flex'
+			        div.style.justifyContent = 'center'
+			        div.style.alignItems = 'center'
+			        div.style.color = 'white'
+			        div.style.background = 'rgba(0, 0, 0, .7)'
+			        document.body.append(div)
+				} else{
+					document.body.removeChild(document.getElementById("load"))
+				}
+			}
+		})
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				msg:"",
+				isgg:false
+			},
+			methods:{
+				feia(){
+					this.msg="";
+					this.isgg=true;
+					setTimeout(()=>{
+						this.isgg=false;
+						this.msg="内容加载完成";
+					},1500)
+				}
+			}
+		})
+	</script>
+</body>
+</html>
