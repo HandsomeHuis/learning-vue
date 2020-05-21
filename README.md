@@ -3,4 +3,8 @@ records of my leaning of vue
 
 # day 1
 
-> 经过长期的思想斗争， 我终于准备把过去的就技术拿回来，准备冲出这囚牢。
+> v-directive,自己写了个全局指令实现加载效果，只需要在想要的地方加上v-gh即可
+
+
+#day 2
+> 主要总结
