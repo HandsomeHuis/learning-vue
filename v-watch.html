@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>watch 的使用方法</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="app1">
+		<input type="text" v-model="msg">
+		<b>{{gg}}</b>
+	</div>
+	<div id="app2">
+		<input type="text" v-model="msg">
+		<b>{{gg}}</b>
+	</div>
+	<div id="app3">
+		<input type="text" v-model="msg.a.b">
+		<b>{{gg}}</b>
+	</div>
+	<div id="app4">
+		<input type="text" v-model="msg">
+		<b>{{gg}}</b>
+	</div>
+	<div id="app5">
+		<input type="text" v-model="msg">
+		<b>{{gg}}</b>
+	</div>
+	<div id="app6">
+		<input type="text" v-model="msg.a.b">
+		<b>{{gg}}</b>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	new Vue({
+		el:"#app1",
+		data:{
+			msg:"hello vue",
+			gg:""
+		},
+		watch:{
+			msg(value){
+				this.gg=value
+			}
+		}
+	})
+	new Vue({
+		el:"#app2",
+		data:{
+			msg:"hello vue",
+			gg:""
+		},
+		watch:{
+			msg:"handler"
+		},
+		methods:{
+			handler(e){
+				this.gg=e
+			}
+		}
+	})
+	new Vue({
+		el:"#app3",
+		data:{
+			msg:{
+				a:{
+					b:"hello vue"
+				}
+			},
+			gg:""
+		},
+		watch:{
+			msg:
+				{
+					handler:"handler",
+					deep:true
+				}
+		},
+		methods:{
+			handler(e){
+				this.gg=e.a.b
+			}
+		}
+	})
+	new Vue({
+		el:"#app4",
+		data:{
+			msg:"hello vue",
+			gg:""
+		},
+		watch:{
+			msg:{
+				handler:"handler",
+				immediate:true
+			}
+		},
+		methods:{
+			handler(e){
+				this.gg=e
+			}
+		}
+	})
+	new Vue({
+		el:"#app5",
+		data:{
+			msg:"hello vue",
+			gg:""
+		 },
+		 watch:{
+		 	msg:[{handler:"handler"},"handler1",function(value){this.gg=this.gg+"*"}]
+		 },
+		 methods:{
+		 	handler(value){
+		 		this.gg=value
+		 	},
+		 	handler1(value){
+		 		this.gg=this.gg+"."
+		 	}
+		 }
+	})
+	new Vue({
+		el:"#app6",
+		data:{
+			msg:{
+				a:{
+					b:"hello vue"
+				}
+			},
+			gg:""
+		},
+		watch:{
+			"msg.a.b":"handler"
+		},
+		methods:{
+			handler(value){
+				this.gg=value;
+			}
+		}
+	})
+</script>
+</html>
