@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id="app">
+		{{message}}
+		<button @click="feia">点我</button>
+
+		<Test></Test>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		//相当于vuex的使用方法
+		const state=Vue.observable({message:"hello my girl"})
+		const mutation={
+			setMessage(value){
+				state.message=value
+			}
+		}
+		Vue.component("Test",{
+			template:"<p>{{message}}</p>",
+			data:function(){
+				return {
+
+				}
+			},
+			computed:{
+				message(){
+					return state.message
+				}
+			}
+		})
+		var vm=new Vue({
+			el:"#app",
+			computed:{
+				message(){
+					return state.message
+				}
+			},
+			methods:{
+				feia(){
+					mutation.setMessage("hello my wife")
+				}
+			}
+		})
+	</script>
+</body>
+</html>
